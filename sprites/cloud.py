@@ -9,14 +9,17 @@ class Cloud(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
 
         self.surface = pygame.display.get_surface()
+        rand_width = random.randint(0, self.surface.get_width())
         rand_height = random.randint(0, self.surface.get_height() / 2)
-        self.rect.midleft = (self.surface.get_width(), rand_height)
+        self.rect.midleft = (rand_width, rand_height)
+        self.speed = random.randint(2, 5)
 
     def draw(self, surface):
         surface.blit(self.image, self.rect)
 
     def update(self):
-        self.rect.x -= 5
+        self.rect.x -= self.speed
 
         if self.rect.right < 0:
-            self.kill()
+            rand_height = random.randint(0, self.surface.get_height() / 2)
+            self.rect.midleft = (self.surface.get_width(), rand_height)
